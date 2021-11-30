@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-postulaciones-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: micro-postulaciones-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: micro-postulaciones-deployment
+    spec:
+      containers:
+      - name: micro-postulaciones-deployment
+        image: jonarosero/micro_postulaciones
+        imagePullPolicy: Always
