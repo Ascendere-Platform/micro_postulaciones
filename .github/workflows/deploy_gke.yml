@@ -7,11 +7,11 @@ on:
     branches:
       - main
 
-env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: convocatoria-ascendere
-  GKE_ZONE: us-central1 
-  DEPLOYMENT_NAME: micro-convocatorias-deployment
+#env:
+  #PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  #GKE_CLUSTER: postulacion-ascendere
+  #GKE_ZONE: us-central1 
+  #DEPLOYMENT_NAME: micro-postulaciones-deployment
 
 jobs:
 
