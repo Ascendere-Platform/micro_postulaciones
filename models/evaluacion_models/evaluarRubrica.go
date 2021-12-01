@@ -1,4 +1,4 @@
-package convocatoriamodels
+package evaluacionmodels
 
 import (
 	apimodels "github.com/ascendere/micro-postulaciones/models/api_models"
