@@ -17,7 +17,7 @@ func Manejadores() {
 	//Llamadas al CRUD de Cronograma
 	router.HandleFunc("/registrarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.RegistrarCronograma))).Methods("POST")
 	router.HandleFunc("/eliminarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.EliminarCronograma))).Methods("DELETE")
-	router.HandleFunc("/verHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.BuscarCronograma))).Methods("GET")
+	router.HandleFunc("/buscarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.BuscarCronograma))).Methods("GET")
 	router.HandleFunc("/listarHitos", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.ListarCronograma))).Methods("GET")
 
 
