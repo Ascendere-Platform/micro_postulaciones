@@ -22,6 +22,7 @@ func RegistrarCronograma(r cronogramamodels.Cronograma) (string, bool, error) {
 		FechaInicio: r.FechaInicio,
 		FechaFin: r.FechaFin,
 		Entregables: r.Entregables,
+		PostualcionId: r.PostualcionId,
 	}
 
 	result, err := col.InsertOne(ctx, registro)

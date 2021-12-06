@@ -9,8 +9,9 @@ import (
 
 type Postulacion struct {
 	ID                 primitive.ObjectID        `bson:"_id,omitempty" json:"id"`
-	Justificacion      string                    `bson:"Justificacion" json:"Justificacion,omitempty"`
-	Alcance            []string                  `bson:"alcance" json:"alcance,omitempty"`
+	NombreProyecto     string                    `bson:"nombreProyecto" json:"nombreProyecto,omitempty"`
+	Justificacion      string                    `bson:"justificacion" json:"justificacion,omitempty"`
+	Alcance            string                    `bson:"alcance" json:"alcance,omitempty"`
 	Requerimientos     string                    `bson:"requerimientos" json:"requerimientos,omitempty"`
 	Resultados         string                    `bson:"resultados" json:"resultados,omitempty"`
 	CalificacionTotal  float64                   `bson:"calificacionTotal" json:"calificacionTotal,omitempty"`
@@ -19,8 +20,8 @@ type Postulacion struct {
 	FechaCreacion      time.Time                 `bson:"fechaInicio" json:"fechaInicio,omitempty"`
 	FechaActualizacion time.Time                 `bson:"fechaFin" json:"fechaFin,omitempty"`
 	Equipo             []apimodels.UsuarioEquipo `bson:"equipo" json:"equipo,omitempty"`
-	Cronograma         []primitive.ObjectID      `bson:"cronograma" json:"cronograma,omitempty"`
 	ConvocatoriaID     primitive.ObjectID        `bson:"convocatoriaID" json:"convocatoriaID,omitempty"`
 	Mensaje            string                    `bson:"mensaje" json:"mensaje,omitempty"`
 	EvaluacionCompleta []primitive.ObjectID      `bson:"evaluacionCompleta" json:"evaluacionCompleta,omitempty"`
+	TipoProyecto       primitive.ObjectID        `bson:"tipoProyectoId" json:"tipoProyectoId,omitempty"`
 }

@@ -9,9 +9,11 @@ import (
 
 func ListarCronograma(w http.ResponseWriter, r *http.Request) {
 
-	result, status := cronogramabd.ListoCronograma()
+	idPostulacion := r.URL.Query().Get("id")
+
+	result, status := cronogramabd.ListoCronograma(idPostulacion)
 	if !status {
-		http.Error(w, "Error al leer los anexos", http.StatusBadRequest)
+		http.Error(w, "Error al leer los hitos del cronograma", http.StatusBadRequest)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")

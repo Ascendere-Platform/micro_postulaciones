@@ -7,9 +7,10 @@ import (
 	"github.com/ascendere/micro-postulaciones/bd"
 	cronogramamodels "github.com/ascendere/micro-postulaciones/models/cronograma_models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func ListoCronograma() ([]*cronogramamodels.Cronograma, bool) {
+func ListoCronograma(id string) ([]*cronogramamodels.Cronograma, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -17,8 +18,9 @@ func ListoCronograma() ([]*cronogramamodels.Cronograma, bool) {
 	col := db.Collection("cronograma")
 
 	var results []*cronogramamodels.Cronograma
+	objId,_ := primitive.ObjectIDFromHex(id)
 
-	query := bson.M{}
+	query := bson.M{"postulacionId":objId}
 
 	cur, err := col.Find(ctx, query)
 	if err != nil {
