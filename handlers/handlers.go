@@ -7,6 +7,7 @@ import (
 
 	"github.com/ascendere/micro-postulaciones/middlew"
 	cronogramasrouters "github.com/ascendere/micro-postulaciones/routers/cronogramas_routers"
+	postulacionrouters "github.com/ascendere/micro-postulaciones/routers/postulacion_routers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -19,6 +20,10 @@ func Manejadores() {
 	router.HandleFunc("/eliminarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.EliminarCronograma))).Methods("DELETE")
 	router.HandleFunc("/buscarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.BuscarCronograma))).Methods("GET")
 	router.HandleFunc("/listarHitos", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.ListarCronograma))).Methods("GET")
+
+	//Llamadas al CRUD de Postulaciones
+	router.HandleFunc("/registrarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.RegistrarPostulacion))).Methods("POST")
+	router.HandleFunc("/buscarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.BuscarPostulacion))).Methods("POST")
 
 
 	PORT := os.Getenv("PORT")
