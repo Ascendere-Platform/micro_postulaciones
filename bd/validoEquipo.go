@@ -15,7 +15,7 @@ func ParteEquipo(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (a
 	defer cancel()
 
 	db := MongoCN.Database("Postualciones")
-	col := db.Collection("postulacion")
+	col := db.Collection("propuestas")
 
 	condicion := bson.M{"_id": idProyecto}
 
@@ -45,7 +45,7 @@ func ValidoGestor(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (
 	defer cancel()
 
 	db := MongoCN.Database("Postualciones")
-	col := db.Collection("postulacion")
+	col := db.Collection("propuestas")
 
 	condicion := bson.M{"_id": idProyecto}
 

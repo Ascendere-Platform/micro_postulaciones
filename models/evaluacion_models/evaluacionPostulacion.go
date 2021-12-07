@@ -4,7 +4,7 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type EvaluacionPostulacion struct {
 	ID                 primitive.ObjectID   `bson:"_id,omitempty" json:"id"`
-	RubricasEvaluadas []primitive.ObjectID `bson:"rubricaEvaluada" json:"rubricaEvaluada,omitempty"`
+	RubricasEvaluadas []EvaluacionRubrica `bson:"rubricaEvaluada" json:"rubricaEvaluada,omitempty"`
 	Calificacion float64 `bson:"calificacion" json:"calificacion,omitempty"`
 	Evaluador struct {
 		Email  string             `json:"email"`

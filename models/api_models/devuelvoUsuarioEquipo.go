@@ -2,10 +2,10 @@ package apimodels
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
-type UsuarioEquipo struct {
+type DevuelvoUsuarioEquipo struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
 	Nombres    string             `bson:"nombre" json:"nombre,omitempty"`
 	Email      string             `bson:"email" json:"email"`
-	Asignatura primitive.ObjectID `bson:"asignaturaID" json:"asignaturaID"`
+	Asignatura Asignatura         `bson:"asignatura" json:"asignatura"`
 	Cargo      string             `bson:"cargo" json:"cargo"`
 }

@@ -24,6 +24,7 @@ func RegistrarPostulacion(w http.ResponseWriter, r *http.Request) {
 	postulacion.Estado = false
 	postulacion.FechaCreacion = time.Now()
 	postulacion.Mensaje = "RECIEN CREADO POR : "+ routers.Nombre
+	postulacion.CalificacionTotal = 0
 
 	objID,_ := primitive.ObjectIDFromHex(routers.IDUsuario)
 
