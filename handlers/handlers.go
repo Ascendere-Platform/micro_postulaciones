@@ -23,7 +23,7 @@ func Manejadores() {
 
 	//Llamadas al CRUD de Postulaciones
 	router.HandleFunc("/registrarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.RegistrarPostulacion))).Methods("POST")
-	router.HandleFunc("/buscarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.BuscarPostulacion))).Methods("POST")
+	router.HandleFunc("/buscarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.BuscarPostulacion))).Methods("GET")
 
 
 	PORT := os.Getenv("PORT")

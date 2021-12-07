@@ -29,6 +29,7 @@ func RegistrarPostulacion(r postulacionmodels.Postulacion, tk string) (string, b
 		FechaCreacion:  r.FechaCreacion,
 		ConvocatoriaID: r.ConvocatoriaID,
 		TipoProyecto:   r.TipoProyecto,
+		Mensaje: r.Mensaje,
 	}
 
 	for _, miembro := range r.Equipo {
