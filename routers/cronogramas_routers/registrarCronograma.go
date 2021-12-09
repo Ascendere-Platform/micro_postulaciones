@@ -6,6 +6,7 @@ import (
 
 	"github.com/ascendere/micro-postulaciones/bd"
 	cronogramabd "github.com/ascendere/micro-postulaciones/bd/cronograma_bd"
+	postulacionbd "github.com/ascendere/micro-postulaciones/bd/postulacion_bd"
 	cronogramamodels "github.com/ascendere/micro-postulaciones/models/cronograma_models"
 	"github.com/ascendere/micro-postulaciones/routers"
 )
@@ -20,14 +21,16 @@ func RegistrarCronograma(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, mensaje, errPostulacion := bd.ParteEquipo(cronograma.PostualcionId, routers.IDUsuario)
+	propuesta, errPropuesta := postulacionbd.BuscoPostulacion(cronograma.PostualcionId.Hex(), routers.Tk)
 
-	if errPostulacion != nil {
+	if errPropuesta != nil {
 		http.Error(w, "El hito no se puede registrar por que el id de la postulación no se encuentra o es incorrecto", 402)
 		return
 	}
 
-	if len(mensaje) > 0 {
+	_, encontrado := bd.ParteEquipo(propuesta, routers.IDUsuario)
+
+	if !encontrado {
 		http.Error(w, "No es parte del equipo, no puede registrar un nuevo Hito al cronograma", 401)
 		return
 	}
