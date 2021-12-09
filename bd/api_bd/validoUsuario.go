@@ -13,15 +13,15 @@ func ValidoUsuario(id string, tk string) (apimodels.UsuarioEquipo, error) {
 	var miembro apimodels.UsuarioEquipo
 
 	var usuario struct {
-		ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-		Nombres    string             `bson:"nombre" json:"nombre,omitempty"`
-		Apellidos string `bson:"apellidos" json:"apellidos,omitempty"`
-		Email      string             `bson:"email" json:"email"`
+		ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+		Nombres   string             `bson:"nombre" json:"nombre,omitempty"`
+		Apellidos string             `bson:"apellidos" json:"apellidos,omitempty"`
+		Email     string             `bson:"email" json:"email"`
 	}
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "http://34.123.95.33/verPerfil?id="+id, nil)
+	req, err := http.NewRequest("GET", "http://34.123.95.33/verperfil?id="+id, nil)
 
 	if err != nil {
 		return miembro, err
