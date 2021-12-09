@@ -65,7 +65,7 @@ func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.Us
 	for _, miembro := range postulacion.Equipo{
 		if miembro.ID == objID && miembro.Cargo == "GESTOR" {
 			usuarioEncontrado = miembro
-			break 
+			return usuarioEncontrado, true, nil
 		}
 	}
 
