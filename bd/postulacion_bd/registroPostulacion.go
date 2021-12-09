@@ -33,7 +33,11 @@ func RegistrarPostulacion(r postulacionmodels.Postulacion, tk string) (string, b
 	}
 
 	for _, miembro := range r.Equipo {
-		personal, _ := apibd.ValidoUsuario(miembro.ID.Hex(), tk)
+		id := miembro.ID.Hex()
+		personal, errorUsuario := apibd.ValidoUsuario(id, tk)
+		if errorUsuario != nil{
+			return "", false, errorUsuario
+		}
 		miembro.Email = personal.Email
 		miembro.Nombres = personal.Nombres
 		registro.Equipo = append(registro.Equipo, miembro)

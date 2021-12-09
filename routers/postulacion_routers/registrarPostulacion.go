@@ -23,13 +23,13 @@ func RegistrarPostulacion(w http.ResponseWriter, r *http.Request) {
 
 	postulacion.Estado = false
 	postulacion.FechaCreacion = time.Now()
-	postulacion.Mensaje = "RECIEN CREADO POR : "+ routers.Nombre
+	postulacion.Mensaje = "RECIEN CREADO POR : " + routers.Nombre
 	postulacion.CalificacionTotal = 0
 
-	objID,_ := primitive.ObjectIDFromHex(routers.IDUsuario)
+	objID, _ := primitive.ObjectIDFromHex(routers.IDUsuario)
 
-	gestor := apimodels.UsuarioEquipo {
-		ID: objID,
+	gestor := apimodels.UsuarioEquipo{
+		ID:    objID,
 		Cargo: "GESTOR",
 	}
 
@@ -48,4 +48,5 @@ func RegistrarPostulacion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(postulacion)
 }
