@@ -6,7 +6,6 @@ import (
 	"github.com/ascendere/micro-postulaciones/bd"
 	cronogramabd "github.com/ascendere/micro-postulaciones/bd/cronograma_bd"
 	"github.com/ascendere/micro-postulaciones/routers"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func EliminarCronograma(w http.ResponseWriter, r *http.Request) {
@@ -17,10 +16,9 @@ func EliminarCronograma(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Debe enviar el id", http.StatusBadRequest)
 		return
 	}
-	objID, _ := primitive.ObjectIDFromHex(routers.IDUsuario)
 	informacion, _ := cronogramabd.BuscoCronograma(cronograma)
 
-	_, encontrado, errPostulacion := bd.ParteEquipo(informacion.PostualcionId, objID)
+	_, encontrado, errPostulacion := bd.ParteEquipo(informacion.PostualcionId, routers.IDUsuario)
 
 	if !encontrado {
 		http.Error(w, "No es parte del equipo, no puede eliminar el Hito al cronograma", 401)

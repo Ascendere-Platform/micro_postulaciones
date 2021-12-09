@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func ParteEquipo(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (apimodels.UsuarioEquipo, bool, error){
+func ParteEquipo(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, bool, error){
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
@@ -29,10 +29,11 @@ func ParteEquipo(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (a
 		return usuarioEncontrado, false, err
 	}
 
+	objID,_ := primitive.ObjectIDFromHex(idUsuario)
 	for _, miembro := range postulacion.Equipo{
-		if miembro.ID == idUsuario {
+		if miembro.ID == objID {
 			usuarioEncontrado = miembro
-			break 
+			return usuarioEncontrado, true, nil
 		}
 	}
 
@@ -40,7 +41,7 @@ func ParteEquipo(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (a
 
 }
 
-func ValidoGestor(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (apimodels.UsuarioEquipo, bool, error){
+func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, bool, error){
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
@@ -59,8 +60,10 @@ func ValidoGestor(idProyecto primitive.ObjectID, idUsuario primitive.ObjectID) (
 		return usuarioEncontrado, false, err
 	}
 
+	objID,_ := primitive.ObjectIDFromHex(idUsuario)
+
 	for _, miembro := range postulacion.Equipo{
-		if miembro.ID == idUsuario && miembro.Cargo == "GESTOR" {
+		if miembro.ID == objID && miembro.Cargo == "GESTOR" {
 			usuarioEncontrado = miembro
 			break 
 		}

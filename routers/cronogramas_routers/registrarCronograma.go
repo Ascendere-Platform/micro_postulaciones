@@ -8,7 +8,6 @@ import (
 	cronogramabd "github.com/ascendere/micro-postulaciones/bd/cronograma_bd"
 	cronogramamodels "github.com/ascendere/micro-postulaciones/models/cronograma_models"
 	"github.com/ascendere/micro-postulaciones/routers"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func RegistrarCronograma(w http.ResponseWriter, r *http.Request) {
@@ -21,9 +20,7 @@ func RegistrarCronograma(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	objID, _ := primitive.ObjectIDFromHex(routers.IDUsuario)
-
-	_, encontrado, errPostulacion := bd.ParteEquipo(cronograma.PostualcionId, objID)
+	_, encontrado, errPostulacion := bd.ParteEquipo(cronograma.PostualcionId, routers.IDUsuario)
 
 	if !encontrado {
 		http.Error(w, "No es parte del equipo, no puede registrar un nuevo Hito al cronograma", 401)
