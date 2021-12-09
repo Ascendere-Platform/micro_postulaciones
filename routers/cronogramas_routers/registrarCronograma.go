@@ -20,15 +20,15 @@ func RegistrarCronograma(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, _, errPostulacion := bd.ParteEquipo(cronograma.PostualcionId, routers.IDUsuario)
-
-	/*if !encontrado {
-		http.Error(w, "No es parte del equipo, no puede registrar un nuevo Hito al cronograma", 401)
-		return
-	}*/
+	_, mensaje, errPostulacion := bd.ParteEquipo(cronograma.PostualcionId, routers.IDUsuario)
 
 	if errPostulacion != nil {
 		http.Error(w, "El hito no se puede registrar por que el id de la postulación no se encuentra o es incorrecto", 402)
+		return
+	}
+
+	if len(mensaje) > 0 {
+		http.Error(w, "No es parte del equipo, no puede registrar un nuevo Hito al cronograma", 401)
 		return
 	}
 

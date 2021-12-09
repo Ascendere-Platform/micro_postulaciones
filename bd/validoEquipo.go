@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func ParteEquipo(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, bool, error){
+func ParteEquipo(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, string, error){
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
@@ -26,22 +26,25 @@ func ParteEquipo(idProyecto primitive.ObjectID, idUsuario string) (apimodels.Usu
 	err := col.FindOne(ctx, condicion).Decode(postulacion)
 
 	if err != nil {
-		return usuarioEncontrado, false, err
+		return usuarioEncontrado, "Proyecto no encontrado", err
 	}
 
 	objID,_ := primitive.ObjectIDFromHex(idUsuario)
 	for _, miembro := range postulacion.Equipo{
 		if miembro.ID == objID {
 			usuarioEncontrado = miembro
-			return usuarioEncontrado, true, nil
 		}
 	}
 
-	return usuarioEncontrado, true, nil
+	if len(usuarioEncontrado.ID) <= 0 {
+		return usuarioEncontrado, "Usuario no encontrado", nil
+	}
+
+	return usuarioEncontrado, "", nil
 
 }
 
-func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, bool, error){
+func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.UsuarioEquipo, string, error){
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
@@ -57,7 +60,7 @@ func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.Us
 	err := col.FindOne(ctx, condicion).Decode(postulacion)
 
 	if err != nil {
-		return usuarioEncontrado, false, err
+		return usuarioEncontrado, "Proyecto no encontrado", err
 	}
 
 	objID,_ := primitive.ObjectIDFromHex(idUsuario)
@@ -65,10 +68,10 @@ func ValidoGestor(idProyecto primitive.ObjectID, idUsuario string) (apimodels.Us
 	for _, miembro := range postulacion.Equipo{
 		if miembro.ID == objID && miembro.Cargo == "GESTOR" {
 			usuarioEncontrado = miembro
-			return usuarioEncontrado, true, nil
+			return usuarioEncontrado, "", nil
 		}
 	}
 
-	return usuarioEncontrado, true, nil
+	return usuarioEncontrado, "", nil
 
 }

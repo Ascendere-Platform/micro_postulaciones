@@ -18,17 +18,18 @@ func EliminarCronograma(w http.ResponseWriter, r *http.Request) {
 	}
 	informacion, _ := cronogramabd.BuscoCronograma(cronograma)
 
-	_, encontrado, errPostulacion := bd.ParteEquipo(informacion.PostualcionId, routers.IDUsuario)
-
-	if !encontrado {
-		http.Error(w, "No es parte del equipo, no puede eliminar el Hito al cronograma", 401)
-		return
-	}
+	_, mensaje, errPostulacion := bd.ParteEquipo(informacion.PostualcionId, routers.IDUsuario)
 
 	if errPostulacion != nil {
-		http.Error(w, "El hito no se eliminar por que el id de la postulación no se encuentra o es incorrecto", 402)
+		http.Error(w, "El hito no se puede registrar por que el id de la postulación no se encuentra o es incorrecto", 402)
 		return
 	}
+
+	if len(mensaje) > 0 {
+		http.Error(w, "No es parte del equipo, no puede registrar un nuevo Hito al cronograma", 401)
+		return
+	}
+
 
 	err := cronogramabd.EliminoCronograma(cronograma)
 	if err != nil {
