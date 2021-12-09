@@ -15,7 +15,7 @@ func BuscarPostulacion(w http.ResponseWriter, r *http.Request) {
 	informacion, err := postulacionbd.BuscoPostulacion(id, routers.Tk)
 
 	if err != nil {
-		http.Error(w, "Ocurrio un error al buscar un Hito del Cronograma ", 400)
+		http.Error(w, "Ocurrio un error al buscar una postulacion " + err.Error(), 400)
 		return
 	}
 
