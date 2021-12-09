@@ -9,12 +9,12 @@ import (
 )
 
 func DevuelvoUsuarioEquipo(usuario apimodels.UsuarioEquipo, tk string) (apimodels.DevuelvoUsuarioEquipo, error) {
-	miembro := apimodels.DevuelvoUsuarioEquipo {
-		ID: usuario.ID,
-		Nombres: usuario.Email,
-		Email: usuario.Email,
-		Cargo: usuario.Cargo,
-	}
+	var miembro apimodels.DevuelvoUsuarioEquipo
+
+	miembro.ID = usuario.ID
+	miembro.Nombres = usuario.Nombres
+	miembro.Email = usuario.Email
+	miembro.Cargo = usuario.Cargo
 
 	var asignatura apimodels.Asignatura
 
@@ -22,10 +22,13 @@ func DevuelvoUsuarioEquipo(usuario apimodels.UsuarioEquipo, tk string) (apimodel
 
 	client := &http.Client{}
 
-
-	req, err := http.NewRequest("GET", "http://34.123.95.33?asignatura="+id, nil)
+	req, err := http.NewRequest("GET", "http://34.123.95.33/buscarAsignatura?asignatura="+id, nil)
 
 	if err != nil {
+		miembro.Asignatura.ID = miembro.ID
+		miembro.Asignatura.NombreAsignatura = ""
+		miembro.Asignatura.FacultadID = ""
+		miembro.Asignatura.Modalidad = ""
 		return miembro, err
 	}
 
@@ -36,6 +39,10 @@ func DevuelvoUsuarioEquipo(usuario apimodels.UsuarioEquipo, tk string) (apimodel
 	resp, error := client.Do(req)
 
 	if error != nil {
+		miembro.Asignatura.ID = miembro.ID
+		miembro.Asignatura.NombreAsignatura = ""
+		miembro.Asignatura.FacultadID = ""
+		miembro.Asignatura.Modalidad = ""
 		return miembro, error
 	}
 
@@ -44,6 +51,10 @@ func DevuelvoUsuarioEquipo(usuario apimodels.UsuarioEquipo, tk string) (apimodel
 	bodyBytes, errorBytes := ioutil.ReadAll(resp.Body)
 
 	if errorBytes != nil {
+		miembro.Asignatura.ID = miembro.ID
+		miembro.Asignatura.NombreAsignatura = ""
+		miembro.Asignatura.FacultadID = ""
+		miembro.Asignatura.Modalidad = ""
 		return miembro, errorBytes
 	}
 
