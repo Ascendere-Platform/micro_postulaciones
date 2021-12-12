@@ -14,7 +14,7 @@ import (
 
 func Manejadores() {
 	router := mux.NewRouter()
-	
+
 	//Llamadas al CRUD de Cronograma
 	router.HandleFunc("/registrarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.RegistrarCronograma))).Methods("POST")
 	router.HandleFunc("/eliminarHito", middlew.ChequeoBD(middlew.ValidoJWT(cronogramasrouters.EliminarCronograma))).Methods("DELETE")
@@ -24,7 +24,10 @@ func Manejadores() {
 	//Llamadas al CRUD de Postulaciones
 	router.HandleFunc("/registrarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.RegistrarPostulacion))).Methods("POST")
 	router.HandleFunc("/buscarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.BuscarPostulacion))).Methods("GET")
-
+	router.HandleFunc("/listarPostulaciones", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.ListarPostulaciones))).Methods("GET")
+	router.HandleFunc("/eliminarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.EliminarPostulacion))).Methods("DELETE")
+	router.HandleFunc("/actualizarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.ActualizarPostulacion))).Methods("PUT")
+	router.HandleFunc("/publicarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.PublicarPostulacion))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

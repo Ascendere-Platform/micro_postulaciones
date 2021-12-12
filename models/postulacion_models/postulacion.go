@@ -18,7 +18,8 @@ type Postulacion struct {
 	Restricciones      string                    `bson:"restricciones" json:"restricciones,omitempty"`
 	Estado             bool                      `bson:"estado" json:"estado,omitempty"`
 	FechaCreacion      time.Time                 `bson:"fechaInicio" json:"fechaInicio,omitempty"`
-	FechaActualizacion time.Time                 `bson:"fechaFin" json:"fechaFin,omitempty"`
+	FechaActualizacion time.Time                 `bson:"fechaActualizacion" json:"fechaActualizacion,omitempty"`
+	FechaPublicacion   time.Time                 `bson:"fechaPostulacion" json:"fechaPostulacion,omitempty"`
 	Equipo             []apimodels.UsuarioEquipo `bson:"equipo" json:"equipo,omitempty"`
 	ConvocatoriaID     primitive.ObjectID        `bson:"convocatoriaID" json:"convocatoriaID,omitempty"`
 	Mensaje            string                    `bson:"mensaje" json:"mensaje,omitempty"`
