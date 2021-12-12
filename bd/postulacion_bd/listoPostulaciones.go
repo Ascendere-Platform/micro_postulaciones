@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func ListoPostulaciones(idUsuario string, tk string, search string) ([]postulacionmodels.DevuelvoPostulacion, error) {
+func ListoPostulaciones(tk string) ([]postulacionmodels.DevuelvoPostulacion, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -18,16 +18,12 @@ func ListoPostulaciones(idUsuario string, tk string, search string) ([]postulaci
 
 	var resultadoCompleto []postulacionmodels.DevuelvoPostulacion
 
-	query := bson.M{
-		"nombre": bson.M{"$regex": `(?i)` + search},
-	}
+	query := bson.M{}
 
 	cur, err := col.Find(ctx, query)
 	if err != nil {
 		return resultadoCompleto, err
 	}
-
-	var incluir bool
 
 	for cur.Next(ctx) {
 		var postulacionSimple postulacionmodels.Postulacion
@@ -41,20 +37,7 @@ func ListoPostulaciones(idUsuario string, tk string, search string) ([]postulaci
 			return resultadoCompleto, errorBusqueda
 		}
 
-		if len(idUsuario) > 0 {
-			_, encontrado := bd.ParteEquipo(postulacionCompleta, idUsuario)
-			if encontrado {
-				incluir = true
-			}
-		}
-
-		if len(idUsuario) == 0 {
-			incluir = true
-		}
-
-		if incluir {
-			resultadoCompleto = append(resultadoCompleto, postulacionCompleta)
-		}
+		resultadoCompleto = append(resultadoCompleto, postulacionCompleta)
 
 	}
 
