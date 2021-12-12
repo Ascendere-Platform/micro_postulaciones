@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func ListoPostulaciones(idUsuario string, tk string, search string, tipo string) ([]postulacionmodels.DevuelvoPostulacion, error) {
+func ListoPostulaciones(idUsuario string, tk string, search string) ([]postulacionmodels.DevuelvoPostulacion, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -40,12 +40,16 @@ func ListoPostulaciones(idUsuario string, tk string, search string, tipo string)
 		if errorBusqueda != nil {
 			return resultadoCompleto, errorBusqueda
 		}
-		
+
 		if len(idUsuario) > 0 {
 			_, encontrado := bd.ParteEquipo(postulacionCompleta, idUsuario)
 			if encontrado {
 				incluir = true
 			}
+		}
+
+		if len(idUsuario) == 0 {
+			incluir = true
 		}
 
 		if incluir {

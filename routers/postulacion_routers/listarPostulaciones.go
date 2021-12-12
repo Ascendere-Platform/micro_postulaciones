@@ -9,21 +9,20 @@ import (
 )
 
 func ListarPostulaciones(w http.ResponseWriter, r*http.Request){
-	typePostulacion := r.URL.Query().Get("tipo")
 	search := r.URL.Query().Get("busqueda")
-	pertenencia := r.URL.Query().Get("dueño")
+	pertenece := r.URL.Query().Get("pertenece")
 
 	var idUsuario string
 
-	if pertenencia == "yo" {
+	if pertenece == "yo" {
 		idUsuario = routers.IDUsuario
 	}
 
-	if pertenencia == "todos"{
+	if pertenece == "todos"{
 		idUsuario = ""
 	}
 
-	result, error := postulacionbd.ListoPostulaciones(idUsuario, routers.Tk, search, typePostulacion)
+	result, error := postulacionbd.ListoPostulaciones(idUsuario, routers.Tk, search)
 	if error != nil {
 		http.Error(w, "Error al leer las postulaciones"+ error.Error(), http.StatusBadRequest)
 		return
