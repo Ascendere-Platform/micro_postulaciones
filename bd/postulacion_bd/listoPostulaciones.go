@@ -40,30 +40,12 @@ func ListoPostulaciones(idUsuario string, tk string, search string, tipo string)
 		if errorBusqueda != nil {
 			return resultadoCompleto, errorBusqueda
 		}
-
-		if len(idUsuario) == 0 {
-			incluir = true
-		}
-
-		if tipo == "new" {
-			if !postulacionCompleta.Estado {
+		
+		if len(idUsuario) > 0 {
+			_, encontrado := bd.ParteEquipo(postulacionCompleta, idUsuario)
+			if encontrado {
 				incluir = true
 			}
-		}
-
-		if tipo == "publish" {
-			if postulacionCompleta.Estado {
-				incluir = true
-			}
-		}
-
-		if len(tipo) == 0 {
-			incluir = true
-		}
-
-		_, encontrado := bd.ParteEquipo(postulacionCompleta, idUsuario)
-		if encontrado {
-			incluir = true
 		}
 
 		if incluir {
