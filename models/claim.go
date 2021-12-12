@@ -11,5 +11,6 @@ type Claim struct {
 	ID        primitive.ObjectID `bson:"_id" json:"_id,omitempty"`
 	Nombre    string             `bson:"nombre" json:"nombre,omitempty"`
 	Apellidos string             `bson:"apellidos" json:"apellidos,omitempty"`
+	Rol       string             `bson:"rol" json:"rol,omitempty"`
 	jwt.StandardClaims
 }
