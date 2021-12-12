@@ -11,8 +11,19 @@ import (
 func ListarPostulaciones(w http.ResponseWriter, r*http.Request){
 	typePostulacion := r.URL.Query().Get("tipo")
 	search := r.URL.Query().Get("busqueda")
+	pertenencia := r.URL.Query().Get("dueño")
 
-	result, error := postulacionbd.ListoPostulaciones(routers.IDUsuario, routers.Tk, search, typePostulacion)
+	var idUsuario string
+
+	if pertenencia == "yo" {
+		idUsuario = routers.IDUsuario
+	}
+
+	if pertenencia == "todos"{
+		idUsuario = ""
+	}
+
+	result, error := postulacionbd.ListoPostulaciones(idUsuario, routers.Tk, search, typePostulacion)
 	if error != nil {
 		http.Error(w, "Error al leer las postulaciones"+ error.Error(), http.StatusBadRequest)
 		return
