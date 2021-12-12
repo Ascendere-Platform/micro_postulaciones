@@ -25,31 +25,31 @@ func ActualizoPostulacion(u postulacionmodels.Postulacion) (bool, error) {
 	}
 
 	if len(u.Alcance) > 0 {
-		registro["periodoConvocatoria"] = u.Alcance
+		registro["alcance"] = u.Alcance
 	}
 
 	if len(u.ConvocatoriaID) > 0 {
-		registro["antecedentes"] = u.ConvocatoriaID
+		registro["convocatoriaID"] = u.ConvocatoriaID
 	}
 
 	if len(u.Restricciones) > 0 {
-		registro["objetivos"] = u.Restricciones
+		registro["restricciones"] = u.Restricciones
 	}
 
 	if len(u.TipoProyecto) > 0 {
-		registro["banner"] = u.TipoProyecto
+		registro["tipoProyectoId"] = u.TipoProyecto
 	}
 
 	if len(u.Justificacion) > 0 {
-		registro["destinatario"] = u.Justificacion
+		registro["justificacion"] = u.Justificacion
 	}
 
 	if len(u.Resultados) > 0 {
-		registro["reconocimiento"] = u.Resultados
+		registro["resultados"] = u.Resultados
 	}
 
 	if len(u.Restricciones) > 0 {
-		registro["compromisos"] = u.Restricciones
+		registro["restricciones"] = u.Restricciones
 	}
 
 	registro["fechaActualizacion"] = u.FechaActualizacion
