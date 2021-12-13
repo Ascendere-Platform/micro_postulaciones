@@ -50,7 +50,7 @@ jobs:
           # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
           creds: "${{ secrets.AZURE_CREDENTIALS }}"
           # Resource Group Name
-          resource-group: aks-postulacion
+          resource-group: ask-postulacion
           # AKS Cluster Name
           cluster-name: postulacion-ascendere
 
@@ -83,4 +83,3 @@ jobs:
           imagepullsecrets: docker-image-pull-secret
           # deploy/promote/reject
           action: deploy
-          
