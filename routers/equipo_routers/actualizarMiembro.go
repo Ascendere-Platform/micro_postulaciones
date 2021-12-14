@@ -37,7 +37,7 @@ func ActualizarMiembroEquipo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(status) == 0 {
+	if len(status) != 0 {
 		http.Error(w, "Error en: "+status, http.StatusBadRequest)
 		return
 	}
