@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/golang-jwt/jwt"
+	"github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
