@@ -30,11 +30,12 @@ func ActualizoMiembro(id string, miembro apimodels.UsuarioEquipo) (string, error
 		return "No se encuentra la postulacion", err
 	}
 
-	for i:= 0; i < len(resultado.Equipo); i++{
-		if resultado.Equipo[i].Cargo == "GESTOR" && miembro.Cargo != "GESTOR"{
-			return "No puede modificar el rol del Gestor", err
-		}
+	for i := 0; i < len(resultado.Equipo); i++ {
+
 		if resultado.Equipo[i].ID == miembro.ID {
+			if resultado.Equipo[i].Cargo == "GESTOR" && miembro.Cargo != "GESTOR" {
+				return "No puede modificar el rol del Gestor", err
+			}
 			if len(miembro.Asignatura) > 0 {
 				resultado.Equipo[i].Asignatura = miembro.Asignatura
 			}
