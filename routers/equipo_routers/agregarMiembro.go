@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/ascendere/micro-postulaciones/bd"
+	apibd "github.com/ascendere/micro-postulaciones/bd/api_bd"
 	equipobd "github.com/ascendere/micro-postulaciones/bd/equipo_bd"
 	postulacionbd "github.com/ascendere/micro-postulaciones/bd/postulacion_bd"
 	apimodels "github.com/ascendere/micro-postulaciones/models/api_models"
@@ -29,6 +30,16 @@ func AgregarMiembroEquipo(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No esta autorizado para agregar un nuevo miembro al equipo", 401)
 		return
 	}
+
+	miembroEncontrado, errBusqueda := apibd.ValidoUsuario(miembroNuevo.ID.Hex(), routers.Tk)
+
+	if errBusqueda != nil {
+		http.Error(w, "El usuario no existe "+ errBusqueda.Error(), 403)
+		return
+	}
+
+	miembroNuevo.Email = miembroEncontrado.Email
+	miembroNuevo.Nombres = miembroEncontrado.Nombres
 
 	status, errUpdt := equipobd.AgregoMiembro(id, miembroNuevo)
 
