@@ -7,6 +7,7 @@ import (
 
 	"github.com/ascendere/micro-postulaciones/middlew"
 	cronogramasrouters "github.com/ascendere/micro-postulaciones/routers/cronogramas_routers"
+	equiporouters "github.com/ascendere/micro-postulaciones/routers/equipo_routers"
 	postulacionrouters "github.com/ascendere/micro-postulaciones/routers/postulacion_routers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
@@ -28,6 +29,11 @@ func Manejadores() {
 	router.HandleFunc("/eliminarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.EliminarPostulacion))).Methods("DELETE")
 	router.HandleFunc("/actualizarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.ActualizarPostulacion))).Methods("PUT")
 	router.HandleFunc("/publicarPostulacion", middlew.ChequeoBD(middlew.ValidoJWT(postulacionrouters.PublicarPostulacion))).Methods("PUT")
+
+	//Llamadas al CRUD de Miembros
+	router.HandleFunc("/agregarMiembro", middlew.ChequeoBD(middlew.ValidoJWT(equiporouters.AgregarMiembroEquipo))).Methods("POST")
+	router.HandleFunc("/eliminarMiembro", middlew.ChequeoBD(middlew.ValidoJWT(equiporouters.EliminoMiembro))).Methods("DELETE")
+	router.HandleFunc("/actualizarMiembro", middlew.ChequeoBD(middlew.ValidoJWT(equiporouters.ActualizarMiembroEquipo))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
