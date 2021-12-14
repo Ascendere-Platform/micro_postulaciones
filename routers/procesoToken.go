@@ -8,7 +8,8 @@ import (
 	"strings"
 
 	"github.com/ascendere/micro-postulaciones/models"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
