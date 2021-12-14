@@ -35,7 +35,12 @@ func ActualizoMiembro(id string, miembro apimodels.UsuarioEquipo) (string, error
 			return "No puede modificar el rol del Gestor", err
 		}
 		if resultado.Equipo[i].ID == miembro.ID {
-			resultado.Equipo[i] = miembro
+			if len(miembro.Asignatura) > 0 {
+				resultado.Equipo[i].Asignatura = miembro.Asignatura
+			}
+			if len(miembro.Cargo) > 0 {
+				resultado.Equipo[i].Cargo = miembro.Cargo
+			}
 		}
 	}
 
