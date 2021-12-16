@@ -19,7 +19,7 @@ type DevuelvoPostulacion struct {
 	Restricciones      string                                   `bson:"restricciones" json:"restricciones,omitempty"`
 	Estado             bool                                     `bson:"estado" json:"estado,omitempty"`
 	FechaCreacion      time.Time                                `bson:"fechaInicio" json:"fechaInicio,omitempty"`
-	FechaActualizacion time.Time                                `bson:"fechaFin" json:"fechaFin,omitempty"`
+	FechaActualizacion time.Time                                `bson:"fechaActualizacion" json:"fechaActualizacion,omitempty"`
 	Equipo             []apimodels.DevuelvoUsuarioEquipo        `bson:"equipo" json:"equipo,omitempty"`
 	Convocatoria       apimodels.Convocatoria                   `bson:"convocatoria" json:"convocatoria,omitempty"`
 	Mensaje            string                                   `bson:"mensaje" json:"mensaje,omitempty"`
