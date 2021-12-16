@@ -40,7 +40,7 @@ func BuscoPostulacion(id string, tk string) (postulacionmodels.DevuelvoPostulaci
 	propuestaEncontrada.Resultados = resultado.Resultados
 	propuestaEncontrada.CalificacionTotal = resultado.CalificacionTotal
 	propuestaEncontrada.Restricciones = resultado.Restricciones
-	propuestaEncontrada.Estado = true
+	propuestaEncontrada.Estado = resultado.Estado
 	propuestaEncontrada.FechaCreacion = resultado.FechaCreacion
 	propuestaEncontrada.FechaActualizacion = resultado.FechaActualizacion
 	idConvocatoria := resultado.ConvocatoriaID.Hex()
