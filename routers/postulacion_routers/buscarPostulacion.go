@@ -2,6 +2,7 @@ package postulacionrouters
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	postulacionbd "github.com/ascendere/micro-postulaciones/bd/postulacion_bd"
@@ -18,6 +19,8 @@ func BuscarPostulacion(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Ocurrio un error al buscar una postulacion " + err.Error(), 400)
 		return
 	}
+
+	log.Println(informacion.Estado)
 
 	w.Header().Set("content-type", "application/json")
 	w.WriteHeader(http.StatusCreated)
