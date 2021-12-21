@@ -35,10 +35,12 @@ func Manejadores() {
 	router.HandleFunc("/eliminarMiembro", middlew.ChequeoBD(middlew.ValidoJWT(equiporouters.EliminoMiembro))).Methods("DELETE")
 	router.HandleFunc("/actualizarMiembro", middlew.ChequeoBD(middlew.ValidoJWT(equiporouters.ActualizarMiembroEquipo))).Methods("PUT")
 
+
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
 		PORT = "8080"
 	}
+	
 	handler := cors.AllowAll().Handler(router)
 	log.Fatal(http.ListenAndServe(":"+PORT, handler))
 }
