@@ -35,7 +35,7 @@ func RegistrarPostulacion(w http.ResponseWriter, r *http.Request) {
 
 	postulacion.Equipo = append(postulacion.Equipo, gestor)
 
-	_, status, err := postulacionbd.RegistrarPostulacion(postulacion, routers.Tk)
+	id, status, err := postulacionbd.RegistrarPostulacion(postulacion, routers.Tk)
 
 	if err != nil {
 		http.Error(w, "Ocurrio un error al insertar la postulacion"+err.Error(), http.StatusBadRequest)
@@ -46,6 +46,10 @@ func RegistrarPostulacion(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No se ha logrado insertar la postulación", http.StatusBadRequest)
 		return
 	}
+
+	idPostulacion, _ := primitive.ObjectIDFromHex(id)
+
+	postulacion.ID = idPostulacion
 
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(postulacion)
