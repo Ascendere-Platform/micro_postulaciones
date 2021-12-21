@@ -22,6 +22,7 @@ func ValidoPostulacion(u postulacionmodels.Postulacion) (bool, error) {
 	if u.Estado {
 		registro["estado"] = u.Estado
 		registro["mensaje"] = u.Mensaje
+		registro["fechaPublicacion"] = u.FechaPublicacion
 	}
 	updtString := bson.M{
 		"$set": registro,
