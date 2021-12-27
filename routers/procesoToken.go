@@ -40,7 +40,7 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 
 		client := &http.Client{}
 
-		req, errRequest := http.NewRequest("GET", "http://34.123.95.33/verPerfil?id="+claims.Id, nil)
+		req, errRequest := http.NewRequest("GET", "http://35.232.65.39/verPerfil?id="+claims.Id, nil)
 
 		if errRequest != nil {
 			return claims, false, "", errRequest
