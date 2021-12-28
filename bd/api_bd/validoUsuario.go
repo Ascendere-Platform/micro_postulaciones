@@ -21,7 +21,7 @@ func ValidoUsuario(id string, tk string) (apimodels.UsuarioEquipo, error) {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "http://34.123.95.33/verperfil?id="+id, nil)
+	req, err := http.NewRequest("GET", "http://35.232.65.39/verperfil?id="+id, nil)
 
 	if err != nil {
 		return miembro, err

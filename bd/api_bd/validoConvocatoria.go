@@ -13,7 +13,7 @@ func ValidoConvocatoria(id string, tk string) (apimodels.Convocatoria, error) {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "http://34.123.204.176/buscarConvocatoria?id="+id, nil)
+	req, err := http.NewRequest("GET", "http://34.135.35.238/buscarConvocatoria?id="+id, nil)
 
 	if err != nil {
 		return convocatoria, err

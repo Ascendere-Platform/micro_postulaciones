@@ -22,7 +22,7 @@ func DevuelvoUsuarioEquipo(usuario apimodels.UsuarioEquipo, tk string) (apimodel
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "http://34.123.95.33/buscarAsignatura?asignatura="+id, nil)
+	req, err := http.NewRequest("GET", "http://35.232.65.39/buscarAsignatura?asignatura="+id, nil)
 
 	if err != nil {
 		miembro.Asignatura.ID = miembro.ID
