@@ -20,9 +20,9 @@ func ValidoPostulacion(u postulacionmodels.Postulacion) (bool, error) {
 	registro := make(map[string]interface{})
 
 	if u.Estado {
-		registro["estado"] = u.Estado
+		registro["estado"] = true
 		registro["mensaje"] = u.Mensaje
-		registro["fechaPublicacion"] = u.FechaPublicacion
+		registro["fechaPublicacion"] = time.Now()
 	}
 	updtString := bson.M{
 		"$set": registro,
