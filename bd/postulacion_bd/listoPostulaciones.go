@@ -9,14 +9,14 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func ListoPostulaciones(tk string) ([]postulacionmodels.Postulacion, error) {
+func ListoPostulaciones(tk string) ([]postulacionmodels.DevuelvoListado, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	db := bd.MongoCN.Database("Postualciones")
 	col := db.Collection("propuestas")
 
-	var results []postulacionmodels.Postulacion
+	var results []postulacionmodels.DevuelvoListado
 
 	query := bson.M{}
 
@@ -26,7 +26,7 @@ func ListoPostulaciones(tk string) ([]postulacionmodels.Postulacion, error) {
 	}
 
 	for cur.Next(ctx) {
-		var s postulacionmodels.Postulacion
+		var s postulacionmodels.DevuelvoListado
 		err := cur.Decode(&s)
 		if err != nil {
 			return results, err
