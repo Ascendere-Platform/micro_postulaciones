@@ -9,42 +9,37 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func ListoPostulaciones(tk string) ([]postulacionmodels.DevuelvoPostulacion, error) {
+func ListoPostulaciones(tk string) ([]postulacionmodels.Postulacion, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	db := bd.MongoCN.Database("Postualciones")
 	col := db.Collection("propuestas")
 
-	var resultadoCompleto []postulacionmodels.DevuelvoPostulacion
+	var results []postulacionmodels.Postulacion
 
 	query := bson.M{}
 
 	cur, err := col.Find(ctx, query)
 	if err != nil {
-		return resultadoCompleto, err
+		return results, err
 	}
 
 	for cur.Next(ctx) {
-		var postulacionSimple postulacionmodels.Postulacion
-		err := cur.Decode(&postulacionSimple)
+		var s postulacionmodels.Postulacion
+		err := cur.Decode(&s)
 		if err != nil {
-			return resultadoCompleto, err
+			return results, err
 		}
-
-		postulacionCompleta, errorBusqueda := BuscoPostulacion(postulacionSimple.ID.Hex(), tk)
-		if errorBusqueda != nil {
-			return resultadoCompleto, errorBusqueda
-		}
-
-		resultadoCompleto = append(resultadoCompleto, postulacionCompleta)
+			results = append(results, s)
 
 	}
 
 	err = cur.Err()
 	if err != nil {
-		return resultadoCompleto, err
+		return results, nil
 	}
 	cur.Close(ctx)
-	return resultadoCompleto, nil
+	return results, err
+
 }
